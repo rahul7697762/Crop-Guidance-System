@@ -8,6 +8,7 @@ import {
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import UserDashboard from "./components/UserDashboard";
+import LandConverter from "./components/LandConverter";
 import SoilAnalysis from "./components/SoilAnalysis";
 import WeatherForecast from "./components/WeatherForecast";
 import CropRecommendation from "./components/CropRecommendation";
@@ -51,6 +52,7 @@ function AppContent() {
         | "recommendations"
         | "market-insights"
         | "profile"
+        | "land-converter"
     >("home");
     const [authMode, setAuthMode] = useState<"login" | "signup">("login");
     const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false);
@@ -163,6 +165,14 @@ function AppContent() {
             color: "text-purple-600",
             bgColor: "bg-purple-50",
         },
+        {
+            title: "Land Converter",
+            description: "Convert acres, hectares, bigha, and more",
+            icon: Globe,
+            color: "from-white-500 to-lime-500",
+            bgColor: "bg-lime-50",
+            iconColor: "text-lime-600",
+        },
     ];
 
     const quickActions = [
@@ -255,6 +265,9 @@ function AppContent() {
             </div>
         );
     }
+    if (currentPage === "land-converter") {
+        return <LandConverter onBack={() => setCurrentPage("home")} />;
+    }
 
     // Main home page
     return (
@@ -319,7 +332,13 @@ function AppContent() {
                                     </div>
                                 )}
                             </div>
-
+                            {/* Land Converter tool */}
+                            <button
+                                onClick={() => setCurrentPage("land-converter")}
+                                className="px-4 py-2 text-sm font-medium hover:text-green-600 bg-white rounded-lg border border-green-200 z-50"
+                            >
+                                Land Converter
+                            </button>
                             {/* User Profile Button */}
                             <button
                                 onClick={() => setCurrentPage("profile")}
