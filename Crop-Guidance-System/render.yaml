@@ -1,0 +1,29 @@
+services:
+  # Python ML Backend
+  - type: web
+    name: crop-prediction-backend
+    env: python
+    rootDir: Machine learning
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: PORT
+        value: 5000
+      - key: MODEL_DIR
+        value: models
+      - key: MODEL_VERSION
+        value: "1"
+
+  # Frontend React (Vite) Static Site
+  - type: static
+    name: cropwise-frontend
+    env: static
+    rootDir: .
+    buildCommand: npm install && npm run build
+    publishPath: dist
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          type: web
+          name: crop-prediction-backend
+          property: host
