@@ -15,7 +15,7 @@ services:
         value: "1"
 
   # Frontend React (Vite) Static Site
-  - type: static
+  - type: web
     name: cropwise-frontend
     env: static
     rootDir: .
