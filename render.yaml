@@ -1,6 +1,5 @@
 version: "1"
 services:
-  # Python ML Backend
   - type: web
     name: crop-prediction-backend
     runtime: python
@@ -9,17 +8,17 @@ services:
     startCommand: gunicorn app:app
     envVars:
       - key: PORT
-        value: 5000
+        value: "5000"
       - key: MODEL_DIR
         value: models
       - key: MODEL_VERSION
         value: "1"
 
-  # Frontend React (Vite) Static Site
-  - type: static_site
+  - type: web
     name: cropwise-frontend
+    runtime: static
     buildCommand: npm install && npm run build
-    publishPath: dist
+    staticPublishPath: dist
     envVars:
       - key: VITE_API_URL
         fromService:
