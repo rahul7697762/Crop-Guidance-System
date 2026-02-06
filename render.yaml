@@ -1,8 +1,9 @@
+version: "1"
 services:
   # Python ML Backend
   - type: web
     name: crop-prediction-backend
-    env: python
+    runtime: python
     rootDir: Machine learning
     buildCommand: pip install -r requirements.txt
     startCommand: gunicorn app:app
@@ -15,10 +16,8 @@ services:
         value: "1"
 
   # Frontend React (Vite) Static Site
-  - type: web
+  - type: static_site
     name: cropwise-frontend
-    env: static
-    rootDir: .
     buildCommand: npm install && npm run build
     publishPath: dist
     envVars:
