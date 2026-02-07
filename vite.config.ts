@@ -19,10 +19,10 @@ export default defineConfig({
     proxy: {
       // Crop recommendation API proxy
       '/api/crop-recommendation': {
-        target: 'http://localhost:5000',
+        target: 'http://localhost:8000',
         changeOrigin: true,
         secure: false,
-        rewrite: (path) => path.replace(/^\/api\/crop-recommendation/, '/api'),
+        rewrite: (path) => path.replace(/^\/api\/crop-recommendation/, ''),
       },
 
       // Weather API proxy
